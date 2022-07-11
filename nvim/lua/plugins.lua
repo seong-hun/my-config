@@ -60,6 +60,14 @@ function M.setup()
 		-- Dressing for better UI
 		use {'stevearc/dressing.nvim'}
 
+		-- Floaterm
+		use {
+			'voldikss/vim-floaterm',
+			config = function()
+				require("config.floaterm").setup()
+			end
+		}
+
 		-- LSP
 		use {
 			'neovim/nvim-lspconfig',
@@ -81,6 +89,7 @@ function M.setup()
 		use 'hrsh7th/cmp-nvim-lsp'
 		use 'hrsh7th/cmp-buffer'
 		use 'hrsh7th/cmp-path'
+		use 'hrsh7th/cmp-omni'
 		use 'hrsh7th/cmp-cmdline'
 		use 'hrsh7th/cmp-vsnip'
 		use 'hrsh7th/vim-vsnip'
@@ -92,12 +101,12 @@ function M.setup()
 		}
 
 		-- Formatter
-		use {
-			'mhartington/formatter.nvim',
-			config = function()
-				require("config.formatter").setup()
-			end,
-		}
+		-- use {
+		-- 	'mhartington/formatter.nvim',
+		-- 	config = function()
+		-- 		require("config.formatter").setup()
+		-- 	end,
+		-- }
 
 		use {
 				"danymat/neogen",
@@ -125,6 +134,8 @@ function M.setup()
 		-- Colorscheme
 		-- use "ellisonleao/gruvbox.nvim"
 		use 'folke/tokyonight.nvim'
+		use 'sainnhe/sonokai'
+		use 'EdenEast/nightfox.nvim'
 
 		-- Utils
 		use {
@@ -204,6 +215,30 @@ function M.setup()
 			end,
 		}
 
+		use {
+			"jeetsukumaran/vim-buffergator",
+			config = function()
+				require("config.buffergator").setup()
+			end,
+		}
+
+		-- Zen mode
+		use 'junegunn/goyo.vim' 
+		use 'junegunn/limelight.vim' 
+		use {
+			"Pocco81/TrueZen.nvim",
+			config = function()
+				require("config.truezen").setup()
+			end,
+		}
+
+		-- Quick note
+		use {
+			'marcushwz/nvim-workbench',
+			config = function()
+				require("config.workbench").setup()
+			end,
+		}
 	end
 
 	packer_init()

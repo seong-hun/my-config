@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
 
-	vim.opt.completeopt = menu,menuone,noselect
+	vim.cmd [[set completeopt=menu,menuone,noselect]]
 
 	local cmp = require'cmp'
 	local lspkind = require('lspkind')
@@ -46,6 +46,28 @@ function M.setup()
 			{ name = 'buffer' },
 		})
 	})
+
+	cmp.setup.filetype('tex', {
+		sources = cmp.config.sources { { name = 'omni', }, }
+	})
+
+	-- cmp.setup.buffer {
+	-- 	formatting = {
+	-- 		format = function(entry, vim_item)
+	-- 			vim_item.menu = ({
+	-- 				omni = (vim.inspect(vim_item.menu):gsub('%"', "")),
+	-- 				buffer = "[Buffer]",
+	-- 				-- formatting for other sources
+	-- 			})[entry.source.name]
+	-- 			return vim_item
+	-- 		end,
+	-- 	},
+	-- 	sources = {
+	-- 		{ name = 'omni' },
+	-- 		{ name = 'buffer' },
+	-- 		-- other sources
+	-- 	},
+	-- }
 
 	-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 	cmp.setup.cmdline('/', {

@@ -4,30 +4,29 @@ function M.setup()
 	local nvim_lsp = require('lspconfig')
 	local protocol = require('vim.lsp.protocol')
 
+	-- Mappings.
+	-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+	local opts = { noremap=true, silent=true }
+	vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+	vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+	vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+
 	local on_attach = function(client, bufnr)
-		local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-		local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
 		-- Enable completion triggered by <c-x><c-o>
-		buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+		vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-		-- Mappings
-		local opts = { noremap = true, silent = true }
-
-		buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-		buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-		buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-
-		buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-		buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-		buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-		buf_set_keymap('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-		buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-		buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-		buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-		buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-		-- buf_set_keymap('n', '<C-j>', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-
+		-- Mappings.
+		-- See `:help vim.lsp.*` for documentation on any of the below functions
+		local bufopts = { noremap=true, silent=true, buffer=bufnr }
+		vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+		vim.keymap.set('n', 'gD', 'gd', bufopts)
+		vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+		vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+		vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+		vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+		vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+		vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+		vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 	end
 
 	local capabilities = require('cmp_nvim_lsp').update_capabilities(
@@ -40,6 +39,34 @@ function M.setup()
 		filetypes = { "python" },
 		capabilities = capabilities,
 		root_dir = nvim_lsp.util.root_pattern(".git"),
+	}
+
+	-- Setup efm
+	local efm_on_attach = function(client)
+			if client.resolved_capabilities.document_formatting then
+					vim.api.nvim_command [[augroup Format]]
+					vim.api.nvim_command [[autocmd! * <buffer>]]
+					vim.api.nvim_command [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()]]
+					vim.api.nvim_command [[augroup END]]
+			end
+	end
+
+
+	nvim_lsp.efm.setup {
+		on_attach=efm_on_attach,
+		init_options = {documentFormatting = true},
+		settings = {
+			rootMarkers = {".git/"},
+			languages = {
+				-- lua = {
+				-- 	{formatCommand = "lua-format -i", formatStdin = true}
+				-- },
+				python = {
+					{formatCommand = "black --quiet -", formatStdin = true},
+					{formatCommand = "isort --quiet -", formatStdin = true},
+				}
+			}
+		}
 	}
 end
 

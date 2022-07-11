@@ -11,6 +11,7 @@ function M.setup()
 		-- 	disable = {},
 		-- },
 		ensure_installed = {"lua", "python", "yaml"},
+		ignore_install = { "latex" },
 	}
 end
 

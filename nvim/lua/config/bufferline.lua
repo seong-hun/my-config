@@ -10,6 +10,7 @@ function M.setup()
 			show_buffer_close_icons = false,
 			show_close_icon = false,
 			diagnostics = "nvim_lsp",
+			enforce_regular_tabs = true,
 		},
 		highlights = { fill = { guibg = { 'bg' } } }
 	}
