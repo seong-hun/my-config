@@ -12,7 +12,14 @@ function M.setup()
 			diagnostics = "nvim_lsp",
 			enforce_regular_tabs = true,
 		},
-		highlights = { fill = { guibg = { 'bg' } } }
+		highlights = {
+			fill = {
+				guibg = {
+					attribute = "bg",
+					highlight = "bg",
+				}
+			}
+		}
 	}
 
 	require("bufferline").setup(config)

@@ -62,14 +62,14 @@ function M.setup()
 			lualine_c = {},
 			lualine_x = {},
 		},
-		tabline = {
-			lualine_a = {},
-			lualine_b = {},
-			lualine_c = {},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = {}
-		}
+		-- tabline = {
+		-- 	lualine_a = {},
+		-- 	lualine_b = {},
+		-- 	lualine_c = {},
+		-- 	lualine_x = {},
+		-- 	lualine_y = {},
+		-- 	lualine_z = {}
+		-- }
 	}
 
 	-- Inserts a component in lualine_c at left section
