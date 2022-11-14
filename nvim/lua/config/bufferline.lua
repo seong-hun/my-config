@@ -14,7 +14,7 @@ function M.setup()
 		},
 		highlights = {
 			fill = {
-				guibg = {
+				bg = {
 					attribute = "bg",
 					highlight = "bg",
 				}

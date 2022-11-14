@@ -1,11 +1,16 @@
 syntax enable
 
+" let g:vimtex_view_method = 'sioyek'
+" let g:vimtex_view_sioyek_exe = '/Applications/sioyek.app/Contents/MacOS/sioyek'
+" let g:vimtex_callback_progpath ='/usr/local/bin/nvim'
+let g:tex_flavor='latex'
 let g:vimtex_view_method = 'skim'
+let g:vimtex_view_skim_sync = 1
+let g:vimtex_view_skim_activate = 0
 let g:vimtex_quickfix_open_on_warning = 0
 let g:vimtex_complete_img_use_tail = 1
 let g:matchup_override_vimtex = 1
 let g:matchup_matchparen_deferred = 1  " for performance
-let g:vimtex_view_skim_activate = 0
 
 augroup latexSurround
 	 autocmd!

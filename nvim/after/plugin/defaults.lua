@@ -4,6 +4,7 @@ vim.opt.sw = 2 -- shiftwidth
 vim.opt.ts = 2 -- tabstop
 vim.opt.ai = true  -- auto indent
 vim.opt.si = true  -- smart indet
+vim.opt.et = true  -- expand tab
 vim.opt.clipboard = "unnamedplus"
 vim.opt.linebreak = true
 vim.opt.breakindent = true
@@ -37,3 +38,6 @@ vim.opt.path:remove "usr/include"
 vim.opt.path:append "**"
 vim.opt.wildignorecase = true
 vim.opt.wildignore:append "**/*.pth"
+
+-- Buffergator
+vim.api.nvim_del_keymap("n", "<Leader>b")

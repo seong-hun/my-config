@@ -26,10 +26,10 @@ function M.setup()
 		vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
 		vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
 		vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-		vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+		vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 	end
 
-	local capabilities = require('cmp_nvim_lsp').update_capabilities(
+	local capabilities = require('cmp_nvim_lsp').default_capabilities(
 		vim.lsp.protocol.make_client_capabilities()
 	)
 
@@ -43,10 +43,10 @@ function M.setup()
 
 	-- Setup efm
 	local efm_on_attach = function(client)
-			if client.resolved_capabilities.document_formatting then
+			if client.server_capabilities.documentFormattingProvider then
 					vim.api.nvim_command [[augroup Format]]
 					vim.api.nvim_command [[autocmd! * <buffer>]]
-					vim.api.nvim_command [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()]]
+					vim.api.nvim_command [[autocmd BufWritePost <buffer> lua vim.lsp.buf.format { async = true }]]
 					vim.api.nvim_command [[augroup END]]
 			end
 	end

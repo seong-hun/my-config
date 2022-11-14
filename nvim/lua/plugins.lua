@@ -76,12 +76,13 @@ function M.setup()
 			end
 		}
 
-		use {
-			'tami5/lspsaga.nvim',
-			config = function()
-				require("config.lspsaga").setup()
-			end,
-		}
+		-- use {
+		-- 	'glepnir/lspsaga.nvim',
+		-- 	branch = "main",
+		-- 	config = function()
+		-- 		require("config.lspsaga").setup()
+		-- 	end,
+		-- }
 
 		use 'onsails/lspkind-nvim'
 
@@ -99,14 +100,6 @@ function M.setup()
 				require("config.nvimcmp").setup()
 			end,
 		}
-
-		-- Formatter
-		-- use {
-		-- 	'mhartington/formatter.nvim',
-		-- 	config = function()
-		-- 		require("config.formatter").setup()
-		-- 	end,
-		-- }
 
 		use {
 				"danymat/neogen",
@@ -209,7 +202,9 @@ function M.setup()
 		use {
 			"akinsho/nvim-bufferline.lua",
 			event = "BufReadPre",
-			wants = "nvim-web-devicons",
+			-- wants = "nvim-web-devicons",
+			tag = "v2.*",
+			requires = "nvim-web-devicons",
 			config = function()
 				require("config.bufferline").setup()
 			end,
@@ -234,11 +229,22 @@ function M.setup()
 
 		-- Quick note
 		use {
-			'marcushwz/nvim-workbench',
+			'weizheheng/nvim-workbench',
 			config = function()
 				require("config.workbench").setup()
 			end,
 		}
+
+		-- Markdown
+		use {
+			"iamcco/markdown-preview.nvim",
+			run = "cd app && npm install",
+			setup = function()
+				vim.g.mkdp_filetypes = { "markdown" }
+			end,
+			ft = { "markdown" },
+		}
+
 	end
 
 	packer_init()

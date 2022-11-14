@@ -2,90 +2,90 @@ local M = {}
 
 function M.setup()
 	local true_zen = require("true-zen")
+	local default_opts = { noremap = true, silent = true }
 	local keymap = vim.api.nvim_set_keymap
 	local keyunmap = vim.api.nvim_del_keymap
-	local default_opts = { noremap = true, silent = true }
 
 	local config = {
-		ui = {
-			bottom = {
-				laststatus = 0,
-				ruler = false,
-				showmode = false,
-				showcmd = false,
-				cmdheight = 1,
+		modes = { -- configurations per mode
+      ataraxis = {
+        shade = "dark", -- if `dark` then dim the padding windows, otherwise if it's `light` it'll brighten said windows
+        backdrop = 0, -- percentage by which padding windows should be dimmed/brightened. Must be a number between 0 and 1. Set to 0 to keep the same background color
+        minimum_writing_area = { -- minimum size of main window
+          width = 70,
+          height = 44,
+        },
+        quit_untoggles = true, -- type :q or :qa to quit Ataraxis mode
+        padding = { -- padding windows
+          left = 52,
+          right = 52,
+          top = 0,
+          bottom = 0,
+        },
+        callbacks = {
+          open_pre = function ()  -- run a function when opening Ataraxis mode
+            vim.opt.conceallevel = 2
+            -- vim.opt.concealcursor = "nc"
+
+            keymap("n", "k", "gk", default_opts)
+            keymap("n", "j", "gj", default_opts)
+            keymap("n", "0", "g0", default_opts)
+            keymap("n", "$", "g$", default_opts)
+          end,
+          close_pos = function ()  -- run a function when closing Ataraxis mode
+            vim.opt.conceallevel = 0
+            -- vim.opt.concealcursor = ""
+
+            keyunmap("n", "k")
+            keyunmap("n", "j")
+            keyunmap("n", "0")
+            keyunmap("n", "$")
+          end,
+        },
+      },
+      minimalist = {
+        ignored_buf_types = { "nofile" }, -- save current options from any window except ones displaying these kinds of buffers
+        options = { -- options to be disabled when entering Minimalist mode
+          number = false,
+          relativenumber = false,
+          showtabline = 0,
+          signcolumn = "no",
+          statusline = "",
+          cmdheight = 1,
+          laststatus = 0,
+          showcmd = false,
+          showmode = false,
+          ruler = false,
+          numberwidth = 1
+        },
+        open_callback = nil, -- run a function when opening Minimalist mode
+        close_callback = nil, -- run a function when closing Minimalist mode
+      },
+      narrow = {
+        --- change the style of the fold lines. Set it to:
+        --- `informative`: to get nice pre-baked folds
+        --- `invisible`: hide them
+        --- function() end: pass a custom func with your fold lines. See :h foldtext
+        folds_style = "informative",
+        run_ataraxis = true, -- display narrowed text in a Ataraxis session
+        open_callback = nil, -- run a function when opening Narrow mode
+        close_callback = nil, -- run a function when closing Narrow mode
+      },
+      focus = {
+        open_callback = nil, -- run a function when opening Focus mode
+        close_callback = nil, -- run a function when closing Focus mode
+      }
+    },
+    integrations = {
+			tmux = false, -- hide tmux status bar in (minimalist, ataraxis)
+			kitty = { -- increment font size in Kitty. Note: you must set `allow_remote_control socket-only` and `listen_on unix:/tmp/kitty` in your personal config (ataraxis)
+				enabled = false,
+				font = "+3"
 			},
-			top = {
-				showtabline = 0,
-			},
-			left = {
-				number = true,
-				relativenumber = false,
-				signcolumn = "no",
-			},
+			twilight = false, -- enable twilight (ataraxis)
+      lualine = true,
 		},
-		modes = {
-			ataraxis = {
-				left_padding = 28,
-				right_padding = 30,
-				top_padding = 1,
-				bottom_padding = 1,
-				ideal_writing_area_width = {0},
-				auto_padding = false,
-				keep_default_fold_fillchars = true,
-				custom_bg = {"none", ""},
-				bg_configuration = true,
-				quit = "untoggle",
-				ignore_floating_windows = true,
-				affected_higroups = {
-					NonText = true,
-					FoldColumn = true,
-					ColorColumn = true,
-					VertSplit = true,
-					StatusLine = true,
-					StatusLineNC = true,
-					SignColumn = true,
-				},
-			},
-			focus = {
-				margin_of_error = 5,
-				focus_method = "experimental"
-			},
-		},
-		integrations = {
-			vim_gitgutter = false,
-			tmux = true,
-			gitsigns = true,
-			nvim_bufferline = true,
-			limelight = false,
-			lualine = true,
-		},
-		misc = {
-			on_off_commands = false,
-			ui_elements_commands = false,
-			cursor_by_mode = false,
-		}
 	}
-
-	true_zen.after_mode_ataraxis_on = function ()
-		vim.opt.conceallevel = 2
-		-- vim.opt.concealcursor = "nc"
-
-		keymap("n", "k", "gk", default_opts)
-		keymap("n", "j", "gj", default_opts)
-		keymap("n", "0", "g0", default_opts)
-		keymap("n", "$", "g$", default_opts)
-	end
-
-	true_zen.after_mode_ataraxis_off = function ()
-		vim.opt.conceallevel = 0
-		-- vim.opt.concealcursor = ""
-
-		keyunmap("n", "k")
-		keyunmap("n", "j")
-		keyunmap("n", "0")
-		keyunmap("n", "$")
-	end
 
 	vim.api.nvim_create_user_command(
 		"TZ",

@@ -4,18 +4,9 @@ function M.setup()
 
 	local saga = require 'lspsaga'
 
-	saga.init_lsp_saga {
-		error_sign = '',
-		warn_sign = '',
-		hint_sign = '',
-		infor_sign = '',
-		border_style = "round",
-	}
+	saga.init_lsp_saga()
 
-	local keymap = vim.api.nvim_set_keymap
-	local opts = { noremap = true, silent = true }
-
-	keymap("n", "gh", "<CMD>Lspsaga lsp_finder<CR>", opts)
+	vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
 
 end
 
