@@ -7,6 +7,7 @@ function M.setup()
 	saga.init_lsp_saga()
 
 	vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
+  vim.keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
 
 end
 

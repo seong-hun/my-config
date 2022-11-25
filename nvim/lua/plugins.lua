@@ -76,13 +76,13 @@ function M.setup()
 			end
 		}
 
-		-- use {
-		-- 	'glepnir/lspsaga.nvim',
-		-- 	branch = "main",
-		-- 	config = function()
-		-- 		require("config.lspsaga").setup()
-		-- 	end,
-		-- }
+		use {
+			'glepnir/lspsaga.nvim',
+			branch = "main",
+			config = function()
+				require("config.lspsaga").setup()
+			end,
+		}
 
 		use 'onsails/lspkind-nvim'
 

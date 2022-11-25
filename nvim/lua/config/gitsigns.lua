@@ -43,7 +43,7 @@ function M.setup()
 	end
 
 	gitsigns.setup {
-		on_attach = on_attach
+		on_attach = on_attach,
 	}
 end
 
