@@ -1,7 +1,9 @@
 local M = {}
 
 function M.setup()
-	vim.g.dashboard_default_executive = "telescope"
+  local db = require("dashboard")
+  local config = {theme = "hyper"}
+  db.setup(config)
 end
 
 return M
