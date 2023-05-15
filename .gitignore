@@ -1,2 +1,5 @@
+.luarc.json
+fish/
+iterm2/
 packer_compiled.lua
 spell/
