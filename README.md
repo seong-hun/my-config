@@ -104,6 +104,15 @@ Install MacTex from the [website](https://tug.org/mactex/mactex-download.html).
 Install Skim (a PDF reader) from the [website](https://skim-app.sourceforge.io).
 From the preference of SKim, `Sync > PDF-TeX Sync support`, set Preset field to `Custom`, type `nvim` in Command field, and type `--headless -c "VimtexInverseSearch %line '%file'"` in Arguments field.
 
+### Git
+
+Install [jannikis' git-ignore interactive CLI](https://github.com/janniks/git-ignore) with
+
+```bash
+brew tap janniks/git-ignore
+brew install git-ignore
+```
+
 ## Usage
 
 ### LspSaga
