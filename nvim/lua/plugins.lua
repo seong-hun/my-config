@@ -65,14 +65,8 @@ function M.setup()
     }
 
     use {
-      'glepnir/lspsaga.nvim',
-      branch = "main",
-      config = function() require("config.lspsaga").setup() end,
-      requires = {
-        {"nvim-tree/nvim-web-devicons"},
-        -- Please make sure you install markdown and markdown_inline parser
-        {"nvim-treesitter/nvim-treesitter"}
-      }
+      'nvimdev/lspsaga.nvim',
+      config = function() require("config.lspsaga").setup() end
     }
 
     -- use({

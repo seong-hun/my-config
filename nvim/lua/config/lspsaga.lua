@@ -1,10 +1,10 @@
 local M = {}
 
 function M.setup()
-  local saga = require("lspsaga")
-  vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>")
+  local lspsaga = require("lspsaga")
+  vim.keymap.set("n", "gh", "<cmd>Lspsaga finder<CR>")
   vim.keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>")
-  saga.setup()
+  lspsaga.setup({finder = {default = "def+ref+imp"}})
 end
 
 return M
