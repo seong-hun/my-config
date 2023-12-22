@@ -33,7 +33,7 @@ Download Node.js from the [website](https://nodejs.org/en/).
 Install [Pyright](https://github.com/microsoft/pyright) using
 
 ```bash
-sudo node install -g pyright
+sudo npm install -g pyright
 ```
 
 ### Homebrew Packages
@@ -48,6 +48,12 @@ Update the Homebrew.
 
 ```bash
 brew update
+```
+
+(Optional) Tmux and oh-my-tmux
+
+```bash
+brew install tmux
 ```
 
 Install [efm-langserver](https://github.com/mattn/efm-langserver) using
