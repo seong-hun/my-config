@@ -56,6 +56,14 @@ brew update
 brew install tmux
 ```
 
+(Optional) oh-my-tmux
+
+```bash
+git clone https://github.com/gpakosz/.tmux.git
+ln -s -f .tmux/.tmux.conf
+ln -s -f .tmux/.tmux.conf.local
+```
+
 Install [efm-langserver](https://github.com/mattn/efm-langserver) using
 
 ```bash
