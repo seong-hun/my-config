@@ -115,6 +115,8 @@ Telescope dependencies:
 
 ```bash
 brew install ripgrep
+brew install lua-language-server
+brew install typescript-language-server
 ```
 
 ### Latex
