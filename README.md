@@ -116,7 +116,20 @@ Telescope dependencies:
 ```bash
 brew install ripgrep
 brew install lua-language-server
-brew install typescript-language-server
+```
+
+Install [LuaFormatter](https://github.com/Koihik/LuaFormatter) for lua with efm:
+```bash
+brew install luarocks
+brew install cmake
+luarocks install --server=https://luarocks.org/dev luaformatter
+```
+
+Install prettierd for js with efm:
+```bash
+brew install prettierd
+mkdir -p ~/.config/nvim/utils/linter-config
+echo {}> ~/.config/nvim/utils/linter-config/.prettierrc.json
 ```
 
 ### Latex
