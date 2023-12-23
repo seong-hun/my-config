@@ -111,6 +111,12 @@ Open Neovim and type the following command to install packages with [packer.nvim
 
 You may close all the vim instances and reopen/rerun the above command several times until no error messages appear.
 
+Telescope dependencies:
+
+```bash
+brew install ripgrep
+```
+
 ### Latex
 
 Install MacTex from the [website](https://tug.org/mactex/mactex-download.html).
